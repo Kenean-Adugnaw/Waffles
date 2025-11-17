@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<head>
+    <title>One Piece Website</title>
+    <style>
+        body {
+            font-family: Times New Roman;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        
+        
+        section {
+            padding: 40px;
+            display: none;
+        }
+        #page1 {
+            display: block;
+            background: linear-gradient(to bottom, #cce7ff, #f0f8ff);
+        }
+        #page2 {
+            background: linear-gradient(to bottom, #fff6cc, #ffe9a3);
+        }
+        img {
+            width: 260px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button {
+            font-size: 18px;
+            margin-top: 20px;
+            
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background-color: #cc0000;
+            color: white;
+            cursor: pointer;
+        }
+        input {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid gray;
+        }
+        #message, #posterDisplay {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+        #poster {
+            width: 300px;
+            background-color: #fdf1d6;
+            border: 3px solid #8b5a2b;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <section id="page1">
+      
+        <h1> Welcome to the world of One Piece </h1>
+        <p> Do you want to help luffy become king of the pirates? </p>
+
+        <img id="luffyImg" src="https://i.pinimg.com/236x/bf/f0/1d/bff01dd0ae186d938f1af8ba127f12bd.jpg">
+        <p> If you want then click the "Go to Crew page". </p>
+        <button onclick="goToPage2()">Go to crew Page</button>
+    </section>
+
+    <section id="page2">
+        <h1> Join the Straw Hat Pirates </h1>
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD-1pTIv93ThYO5Vyh8P0ZZ8HgYFSgaR2RKKNez4AMZA&s=10">
+
+        <br><br>
+
+        <input id="userName" type="text" placeholder="Enter your pirate name">
+        <button id="joinBtn">Join Crew</button>
+
+        <p id="message"></p>
+
+        <h1>Create Your Bounty Poster</h1>
+
+        <input id="posterName" type="text" placeholder="Pirate name">
+        <br><br>
+        <input id="posterBounty" type="number" placeholder="Bounty (berries)">
+        <br><br>
+        <button id="makePoster">Create Poster</button>
+
+        <div id="posterDisplay"></div>
+
+        <button onclick="goToPage1()">Back to Intro</button>
+    </section>
+
+    <script>
+        let page1 = document.getElementById("page1");
+        let page2 = document.getElementById("page2");
+
+        function goToPage1() {
+            page1.style.display = "block";
+            page2.style.display = "none";
+        }
+        function goToPage2() {
+            page1.style.display = "none";
+            page2.style.display = "block";
+        }
+
+        let luffyImg = document.getElementById("luffyImg");
+        luffyImg.addEventListener("click", function () {
+            if (luffyImg.src.includes("luffy1.jpg")) {
+                luffyImg.src = "luffy2.jpg";
+            } else {
+                luffyImg.src = "luffy1.jpg";
+            }
+        });
+
+        const joinBtn = document.getElementById("joinBtn");
+        const userName = document.getElementById("userName");
+        const message = document.getElementById("message");
+
+        joinBtn.addEventListener("click", function () {
+            let name = userName.value;
+            if (name === "") {
+                message.textContent = "Please enter a name!";
+                message.style.color = "red";
+            } else {
+                message.textContent = name + " has joined the Straw Hat Crew!";
+                message.style.color = "green";
+                userName.value = "";
+            }
+        });
+
+        const makePoster = document.getElementById("makePoster");
+        const posterName = document.getElementById("posterName");
+        const posterBounty = document.getElementById("posterBounty");
+        const posterDisplay = document.getElementById("posterDisplay");
+
+        makePoster.addEventListener("click", function () {
+            let n = posterName.value;
+            let b = posterBounty.value;
+
+            if (n === "" || b === "") {
+                posterDisplay.textContent = "Fill both boxes.";
+                posterDisplay.style.color = "red";
+            } else {
+                posterDisplay.style.color = "black";
+                posterDisplay.innerHTML =
+                "<div id='poster'>" +
+                "<h2>WANTED</h2>" +
+                "<p><strong>" + n + "</strong></p>" +
+                "<p>Bounty: " + b + " Berries</p>" +
+                "</div>";
+            }
+        });
+    </script>
+
+</body>
+</html>
